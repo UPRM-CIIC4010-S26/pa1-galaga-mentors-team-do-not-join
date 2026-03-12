@@ -399,7 +399,9 @@ FodyWeavers.xsd
 build_files
 raylib-5.5
 raylib-cpp
+raylib-cpp-temp
 Makefile
 /*.sln
 
 .DS_Store
+
