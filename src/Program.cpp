@@ -61,7 +61,7 @@ void Program::Update() {
             if(p.ID != 0)
                 if(HitBox::Collision(p.getHitBox(), player->hitBox))
                     PlayerReset();
-            
+                       
         }
 
         if (lives <= 0 && pauseFrames <= 0) gameOver = true;
@@ -82,6 +82,7 @@ void Program::Draw() {
                    Vector2{0, 0}, 0, WHITE);
     }
 
+    DrawText(TextFormat("Current Score: %d", score), GetScreenWidth() / 2 - 55, 25, 15, WHITE);
 
     for (Projectile p : Projectile::projectiles) p.draw();
     for (std::pair<std::pair<float, float>, Enemy*>& p : Enemy::enemies) if (p.second) p.second->draw();
@@ -157,6 +158,7 @@ void Program::KeyInputs() {
     if (!paused && !startup && IsKeyPressed('O')) gameOver = !gameOver;
     if (!gameOver && !paused && IsKeyPressed('I')) startup = !startup;
     if (IsKeyPressed('H')) HitBox::drawHitbox = !HitBox::drawHitbox;
+    if (IsKeyPressed('K')) score += 500;
     
     if (gameOver && IsKeyPressed(KEY_ENTER)) {
         gameOver = false;
