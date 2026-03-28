@@ -35,7 +35,7 @@ void Program::Update() {
     pauseFrames = std::max(pauseFrames - 1, 0);
 
     if (!startup && !paused && !gameOver && pauseFrames <= 0) {
-        Enemy::ManageEnemies(player->hitBox);
+        Enemy::ManageEnemies(player->hitBox, score);
         StdEnemy::attackReset();
         ManageEnemyRespawns();
         player->update();
@@ -69,6 +69,19 @@ void Program::Update() {
         Projectile::ProjectileCollision();
 
     }
+
+        if (score >= nextLifeScore) {
+        if (lives < 5) lives++;
+        nextLifeScore += 1000;
+    }
+
+    int minCooldown = 300;
+    int scoreFactor = score / 1000;
+    respawnCooldown = std::max(1080 - scoreFactor * 100, minCooldown);
+
+    StdEnemy::attackReset();
+    ManageEnemyRespawns();
+    player->update();
 }
 
 void Program::Draw() {
@@ -194,6 +207,7 @@ void Program::Reset() {
     count = 0;
     delay = 0;
     lives = 3;
+    score = 0;
 
     //Just Copy Paste brou ;)
 
