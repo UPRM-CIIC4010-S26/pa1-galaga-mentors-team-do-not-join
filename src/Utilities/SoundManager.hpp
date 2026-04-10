@@ -10,18 +10,28 @@ class SoundManager {
     static inline Sound shoot;
 
     static void Load() {
+
         attack = LoadSound("audio/attack.mp3");
         dead = LoadSound("audio/dead.mp3");
         gameOver = LoadSound("audio/gameOver.mp3");
         hit = LoadSound("audio/hit.mp3");
         shoot = LoadSound("audio/shoot.mp3");
+
+        SetSoundVolume(attack, 0.1);
+        SetSoundVolume(dead, 0.1);
+        SetSoundVolume(gameOver, 0.1);
+        SetSoundVolume(hit, 0.1);
+        SetSoundVolume(shoot, 0.1);
+                
     }
 
     static void Unload() {
+        
         UnloadSound(attack);
         UnloadSound(dead);
         UnloadSound(gameOver);
         UnloadSound(hit);
         UnloadSound(shoot);
+    
     }
 };
