@@ -16,14 +16,16 @@ class SoundManager {
         gameOver = LoadSound("audio/gameOver.mp3");
         hit = LoadSound("audio/hit.mp3");
         shoot = LoadSound("audio/shoot.mp3");
-
-        SetSoundVolume(attack, 0.1);
-        SetSoundVolume(dead, 0.1);
-        SetSoundVolume(gameOver, 0.1);
-        SetSoundVolume(hit, 0.1);
-        SetSoundVolume(shoot, 0.1);
                 
     }
+
+    static void SetGlobalVolume(float volume) {
+    SetSoundVolume(attack, volume);
+    SetSoundVolume(dead, volume);
+    SetSoundVolume(gameOver, volume);
+    SetSoundVolume(hit, volume);
+    SetSoundVolume(shoot, volume);
+}
 
     static void Unload() {
         

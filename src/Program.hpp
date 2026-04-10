@@ -20,7 +20,9 @@ class Program {
         int lives = 3;
         int pauseFrames = 0;
         inline static int score = 0;
+        float volume = 1.0f;   
 
+        bool muted = false; 
         bool startup = true;
         bool paused = false;
         bool gameOver = false;

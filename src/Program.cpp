@@ -172,6 +172,15 @@ void Program::KeyInputs() {
     if (!gameOver && !paused && IsKeyPressed('I')) startup = !startup;
     if (IsKeyPressed('H')) HitBox::drawHitbox = !HitBox::drawHitbox;
     if (IsKeyPressed('K')) score += 500;
+    if (IsKeyDown(KEY_MINUS)) {
+        volume = std::max(0.0f, volume - 0.01f);
+        SoundManager::SetGlobalVolume(volume);
+    }
+
+    if (IsKeyDown(KEY_EQUAL)) {
+        volume = std::min(1.0f, volume + 0.01f);
+        SoundManager::SetGlobalVolume(volume);
+    }
     
     if (gameOver && IsKeyPressed(KEY_ENTER)) {
         gameOver = false;
