@@ -3,6 +3,7 @@
 #include "Math.hpp"
 #include "ImageManager.hpp"
 #include "Animation.hpp"
+#include "SoundManager.hpp"
 #include <iostream>
 
 class Enemy {
@@ -44,7 +45,7 @@ class Enemy {
                 frameCooldown = 30;
              }
         }
-
+            
         static void ManageEnemies(HitBox target, int& score) {
             for (std::pair<std::pair<float, float>, Enemy*>& p : Enemy::enemies) {
                 p.first.first += (p.first.first == 0) ? 0 : direction;
@@ -55,14 +56,15 @@ class Enemy {
                         if (p2.ID != 1 && HitBox::Collision(p.second->hitBox, p2.getHitBox())) {
                             p.second->health--;
                             p2.del = true;
+                            PlaySound(SoundManager::hit);
                         }
                     }
 
                     if (p.second->health <= 0) {
                         score += p.second->scoreValue;
                         Animation::animations.push_back(
-                            Animation(p.second->position.first, p.second->position.second, 155, 0, 33, 33, 30, 30, 4, ImageManager::SpriteSheet)
-                        );
+                        Animation(p.second->position.first, p.second->position.second, 155, 0, 33, 33, 30, 30, 4, ImageManager::SpriteSheet));
+                        PlaySound(SoundManager::dead);
                         p.second = nullptr;
                     }
                 }
